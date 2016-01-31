@@ -8,3 +8,16 @@ String functions are used in computer programming languages to manipulate a stri
 — From WikiPedia [String Functions, by Programming Languages](http://en.wikipedia.org/wiki/String_functions)
 
 ### Features
+
+- [x] `replace` - Replace a text string with another
+- [x] `capitalize` - Convert a text string into a capitalized version of its words
+- [x] `uppercase` - Convert all the characters in a text string into their capital form
+- [x] `lowercase` - Convert all the characters in a text string into their lower form
+- [x] `md5` - Calculate the md5 hash of the string specified
+- [x] `sha1` - Calculate the sha1 hash of the string specified
+- [x] `length` - Returns the length of the string specified
+- [x] `b64enc` - Encodes data with MIME base64
+- [x] `b64dec` - Decodes data encoded with MIME base64
+- [x] `urldec` - Decodes URL-encoded string
+- [x] `urlenc` - Encodes URL string with their correspondent hex digits
+- [x] `rotate` - Perform a rotation on a string by the value specified
