@@ -20,6 +20,7 @@ func main() {
 		fmt.Println()
 		fmt.Println("Usage:")
 		fmt.Println("  echo [text] | strconv replace")
+		fmt.Println("  echo [text] | strconv capitalize")
 		flag.PrintDefaults()
 		os.Exit(2)
 	}
@@ -39,6 +40,9 @@ func main() {
 	switch action {
 	case "replace":
 		fmt.Println(app.Replace(text, flag.Arg(2), flag.Arg(3)))
+		break
+	case "capitalize":
+		fmt.Println(app.Capitalize(text))
 		break
 	}
 }

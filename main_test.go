@@ -11,3 +11,11 @@ func TestReplace(t *testing.T) {
 		t.Fatalf("Replace did not run as expected")
 	}
 }
+
+func TestCapitalize(t *testing.T) {
+	var app Application
+
+	if app.Capitalize(text) != "Tf GO1Qnn7S60 WqsxKdVFQ7 NnnFQnsVD1n5MPpVqBnNrraQd2" {
+		t.Fatalf("Capitalize did not run as expected")
+	}
+}
