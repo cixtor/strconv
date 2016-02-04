@@ -19,3 +19,11 @@ func TestCapitalize(t *testing.T) {
 		t.Fatalf("Capitalize did not run as expected")
 	}
 }
+
+func TestUppercase(t *testing.T) {
+	var app Application
+
+	if app.Uppercase(text) != "TF GO1QNN7S60 WQSXKDVFQ7 NNNFQNSVD1N5MPPVQBNNRRAQD2" {
+		t.Fatalf("Uppercase did not run as expected")
+	}
+}
