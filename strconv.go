@@ -15,6 +15,7 @@ type Converter interface {
 	Replace(string) string
 	Capitalize(string) string
 	Uppercase(string) string
+	Lowercase(string) string
 }
 
 // Application is the implementation.
@@ -30,4 +31,8 @@ func (app Application) Capitalize(text string) string {
 
 func (app Application) Uppercase(text string) string {
 	return strings.ToUpper(text)
+}
+
+func (app Application) Lowercase(text string) string {
+	return strings.ToLower(text)
 }

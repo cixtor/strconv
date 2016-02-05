@@ -27,3 +27,11 @@ func TestUppercase(t *testing.T) {
 		t.Fatalf("Uppercase did not run as expected")
 	}
 }
+
+func TestLowercase(t *testing.T) {
+	var app Application
+
+	if app.Lowercase(text) != "tf go1qnn7s60 wqsxkdvfq7 nnnfqnsvd1n5mppvqbnnrraqd2" {
+		t.Fatalf("Lowercase did not run as expected")
+	}
+}

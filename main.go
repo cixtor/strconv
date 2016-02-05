@@ -22,6 +22,7 @@ func main() {
 		fmt.Println("  echo [text] | strconv replace")
 		fmt.Println("  echo [text] | strconv capitalize")
 		fmt.Println("  echo [text] | strconv uppercase")
+		fmt.Println("  echo [text] | strconv lowercase")
 		flag.PrintDefaults()
 		os.Exit(2)
 	}
@@ -47,6 +48,9 @@ func main() {
 		break
 	case "uppercase":
 		fmt.Println(app.Uppercase(text))
+		break
+	case "lowercase":
+		fmt.Println(app.Lowercase(text))
 		break
 	}
 }
