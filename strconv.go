@@ -16,6 +16,7 @@ type Converter interface {
 	Capitalize(string) string
 	Uppercase(string) string
 	Lowercase(string) string
+	Md5(string) string
 }
 
 // Application is the implementation.
@@ -35,4 +36,13 @@ func (app Application) Uppercase(text string) string {
 
 func (app Application) Lowercase(text string) string {
 	return strings.ToLower(text)
+}
+
+func (app Application) Md5(text string) string {
+	hash := md5.New()
+
+	io.WriteString(hash, text)
+
+	return fmt.Sprintf("%x", hash.Sum(nil))
+
 }

@@ -35,3 +35,11 @@ func TestLowercase(t *testing.T) {
 		t.Fatalf("Lowercase did not run as expected")
 	}
 }
+
+func TestMd5(t *testing.T) {
+	var app Application
+
+	if app.Md5(text) != "03e32e975dc9565535b854908a0e8624" {
+		t.Fatalf("Md5 did not run as expected: %s", app.Md5(text))
+	}
+}
