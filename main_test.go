@@ -43,3 +43,11 @@ func TestMd5(t *testing.T) {
 		t.Fatalf("Md5 did not run as expected: %s", app.Md5(text))
 	}
 }
+
+func TestSha1(t *testing.T) {
+	var app Application
+
+	if app.Sha1(text) != "c9e1d6ee08eb9f0355a4c2ee58cc37c536e57182" {
+		t.Fatalf("Sha1 did not run as expected")
+	}
+}

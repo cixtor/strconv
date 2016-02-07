@@ -24,6 +24,7 @@ func main() {
 		fmt.Println("  echo [text] | strconv uppercase")
 		fmt.Println("  echo [text] | strconv lowercase")
 		fmt.Println("  echo [text] | strconv md5")
+		fmt.Println("  echo [text] | strconv sha1")
 		flag.PrintDefaults()
 		os.Exit(2)
 	}
@@ -55,6 +56,9 @@ func main() {
 		break
 	case "md5":
 		fmt.Println(app.Md5(text))
+		break
+	case "sha1":
+		fmt.Println(app.Sha1(text))
 		break
 	}
 }

@@ -17,6 +17,7 @@ type Converter interface {
 	Uppercase(string) string
 	Lowercase(string) string
 	Md5(string) string
+	Sha1(string) string
 }
 
 // Application is the implementation.
@@ -45,4 +46,12 @@ func (app Application) Md5(text string) string {
 
 	return fmt.Sprintf("%x", hash.Sum(nil))
 
+}
+
+func (app Application) Sha1(text string) string {
+	hash := sha1.New()
+
+	io.WriteString(hash, text)
+
+	return fmt.Sprintf("%x", hash.Sum(nil))
 }
