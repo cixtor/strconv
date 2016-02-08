@@ -51,3 +51,11 @@ func TestSha1(t *testing.T) {
 		t.Fatalf("Sha1 did not run as expected")
 	}
 }
+
+func TestLength(t *testing.T) {
+	var app Application
+
+	if app.Length(text) != 51 {
+		t.Fatalf("Length did not run as expected")
+	}
+}
