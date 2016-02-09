@@ -26,6 +26,7 @@ func main() {
 		fmt.Println("  echo [text] | strconv md5")
 		fmt.Println("  echo [text] | strconv sha1")
 		fmt.Println("  echo [text] | strconv length")
+		fmt.Println("  echo [text] | strconv b64enc")
 		flag.PrintDefaults()
 		os.Exit(2)
 	}
@@ -63,6 +64,9 @@ func main() {
 		break
 	case "length":
 		fmt.Println(app.Length(text))
+		break
+	case "b64enc":
+		fmt.Println(app.Base64Encode(text))
 		break
 	}
 }

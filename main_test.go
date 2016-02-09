@@ -59,3 +59,13 @@ func TestLength(t *testing.T) {
 		t.Fatalf("Length did not run as expected")
 	}
 }
+
+func TestBase64Encode(t *testing.T) {
+	var app Application
+
+	expected := "dGYgR08xUW5uN1M2MCBXcXN4S2RWRlE3IG5ubkZRbnNWRDFuNU1QcFZxQm5OcnJhUWQy"
+
+	if app.Base64Encode(text) != expected {
+		t.Fatalf("Base64Encode did not run as expected")
+	}
+}

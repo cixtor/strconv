@@ -19,6 +19,7 @@ type Converter interface {
 	Md5(string) string
 	Sha1(string) string
 	Length(string) int
+	Base64Encode(string) string
 }
 
 // Application is the implementation.
@@ -59,4 +60,8 @@ func (app Application) Sha1(text string) string {
 
 func (app Application) Length(text string) int {
 	return len(text)
+}
+
+func (app Application) Base64Encode(text string) string {
+	return base64.StdEncoding.EncodeToString([]byte(text))
 }
