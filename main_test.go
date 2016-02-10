@@ -69,3 +69,13 @@ func TestBase64Encode(t *testing.T) {
 		t.Fatalf("Base64Encode did not run as expected")
 	}
 }
+
+func TestBase64Decode(t *testing.T) {
+	var app Application
+
+	initial := "dGYgR08xUW5uN1M2MCBXcXN4S2RWRlE3IG5ubkZRbnNWRDFuNU1QcFZxQm5OcnJhUWQy"
+
+	if app.Base64Decode(initial) != text {
+		t.Fatalf("Base64Decode did not run as expected")
+	}
+}

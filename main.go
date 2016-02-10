@@ -27,6 +27,7 @@ func main() {
 		fmt.Println("  echo [text] | strconv sha1")
 		fmt.Println("  echo [text] | strconv length")
 		fmt.Println("  echo [text] | strconv b64enc")
+		fmt.Println("  echo [text] | strconv b64dec")
 		flag.PrintDefaults()
 		os.Exit(2)
 	}
@@ -67,6 +68,9 @@ func main() {
 		break
 	case "b64enc":
 		fmt.Println(app.Base64Encode(text))
+		break
+	case "b64dec":
+		fmt.Println(app.Base64Decode(text))
 		break
 	}
 }

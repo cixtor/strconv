@@ -20,6 +20,7 @@ type Converter interface {
 	Sha1(string) string
 	Length(string) int
 	Base64Encode(string) string
+	Base64Decode(string) string
 }
 
 // Application is the implementation.
@@ -64,4 +65,14 @@ func (app Application) Length(text string) int {
 
 func (app Application) Base64Encode(text string) string {
 	return base64.StdEncoding.EncodeToString([]byte(text))
+}
+
+func (app Application) Base64Decode(text string) string {
+	out, err := base64.StdEncoding.DecodeString(text)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return fmt.Sprintf("%s", out)
 }
