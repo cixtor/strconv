@@ -21,6 +21,7 @@ type Converter interface {
 	Length(string) int
 	Base64Encode(string) string
 	Base64Decode(string) string
+	UrlDecode(string) string
 }
 
 // Application is the implementation.
@@ -75,4 +76,14 @@ func (app Application) Base64Decode(text string) string {
 	}
 
 	return fmt.Sprintf("%s", out)
+}
+
+func (app Application) UrlDecode(text string) string {
+	out, err := url.QueryUnescape(text)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return out
 }
