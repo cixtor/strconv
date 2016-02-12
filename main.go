@@ -29,6 +29,7 @@ func main() {
 		fmt.Println("  echo [text] | strconv b64enc")
 		fmt.Println("  echo [text] | strconv b64dec")
 		fmt.Println("  echo [text] | strconv urldec")
+		fmt.Println("  echo [text] | strconv urlenc")
 		flag.PrintDefaults()
 		os.Exit(2)
 	}
@@ -75,6 +76,9 @@ func main() {
 		break
 	case "urldec":
 		fmt.Println(app.UrlDecode(text))
+		break
+	case "urlenc":
+		fmt.Println(app.UrlEncode(text))
 		break
 	}
 }

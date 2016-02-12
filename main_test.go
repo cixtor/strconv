@@ -90,3 +90,14 @@ func TestUrlDecode(t *testing.T) {
 		t.Fatalf("UrlDecode did not run as expected")
 	}
 }
+
+func TestUrlEncode(t *testing.T) {
+	var app Application
+
+	initial := "https://cixtor.com/?foo=bar&lorem=ipsum"
+	expected := "https%3A%2F%2Fcixtor.com%2F%3Ffoo%3Dbar%26lorem%3Dipsum"
+
+	if app.UrlEncode(initial) != expected {
+		t.Fatalf("UrlEncode did not run as expected")
+	}
+}

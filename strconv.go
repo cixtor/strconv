@@ -22,6 +22,7 @@ type Converter interface {
 	Base64Encode(string) string
 	Base64Decode(string) string
 	UrlDecode(string) string
+	UrlEncode(string) string
 }
 
 // Application is the implementation.
