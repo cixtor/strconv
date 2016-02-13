@@ -101,3 +101,11 @@ func TestUrlEncode(t *testing.T) {
 		t.Fatalf("UrlEncode did not run as expected")
 	}
 }
+
+func TestRotate(t *testing.T) {
+	var app Application
+
+	if app.Rotate(text) != "gs TB1Daa7F60 JdfkXqISD7 aaaSDafIQ1a5ZCcIdOaAeenDq2" {
+		t.Fatalf("Rotate did not run as expected")
+	}
+}

@@ -23,6 +23,7 @@ type Converter interface {
 	Base64Decode(string) string
 	UrlDecode(string) string
 	UrlEncode(string) string
+	Rotate(string) string
 }
 
 // Application is the implementation.
@@ -87,4 +88,23 @@ func (app Application) UrlDecode(text string) string {
 	}
 
 	return out
+}
+
+func (app Application) UrlEncode(text string) string {
+	return url.QueryEscape(text)
+}
+
+func (app Application) Rotate(text string) string {
+	rotator := func(char rune) rune {
+		number := 13
+		switch {
+		case char >= 'A' && char <= 'Z':
+			return 'A' + (char-'A'+rune(number))%26
+		case char >= 'a' && char <= 'z':
+			return 'a' + (char-'a'+rune(number))%26
+		}
+		return char
+	}
+
+	return strings.Map(rotator, text)
 }
