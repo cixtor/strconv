@@ -31,7 +31,11 @@ func main() {
 		fmt.Println("  echo [text] | strconv urldec")
 		fmt.Println("  echo [text] | strconv urlenc")
 		fmt.Println("  echo [text] | strconv rotate")
-		flag.PrintDefaults()
+		fmt.Println()
+		fmt.Println("Alias:")
+		fmt.Println("  alias upper=\"strconv uppercase\"")
+		fmt.Println("  alias lower=\"strconv lowercase\"")
+		fmt.Println("  alias len=\"strconv length\"")
 		os.Exit(2)
 	}
 
