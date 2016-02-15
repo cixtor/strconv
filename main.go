@@ -39,7 +39,9 @@ func main() {
 		os.Exit(2)
 	}
 
-	action := flag.Arg(1)
+	flag.Parse()
+
+	action := flag.Arg(0)
 
 	if action == "" {
 		flag.Usage()
@@ -53,7 +55,7 @@ func main() {
 
 	switch action {
 	case "replace":
-		fmt.Println(app.Replace(text, flag.Arg(2), flag.Arg(3)))
+		fmt.Println(app.Replace(text, flag.Arg(1), flag.Arg(2)))
 		break
 	case "capitalize":
 		fmt.Println(app.Capitalize(text))
