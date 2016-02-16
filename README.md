@@ -21,3 +21,46 @@ String functions are used in computer programming languages to manipulate a stri
 - [x] `urldec` - Decodes URL-encoded string
 - [x] `urlenc` - Encodes URL string with their correspondent hex digits
 - [x] `rotate` - Perform a rotation on a string by the value specified
+
+### Usage
+
+```shell
+$ echo "Hello, World" | strconv replace o @
+Hell@, W@rld
+
+$ echo "hello, world" | strconv capitalize
+Hello, World
+
+$ echo "hello, world" | strconv uppercase
+HELLO, WORLD
+
+$ echo "HELLO, WORLD" | strconv lowercase
+hello, world
+
+$ echo "hello, world" | strconv md5
+e4d7f1b4ed2e42d15898f4b27b019da4
+
+$ echo "hello, world" | strconv sha1
+b7e23ec29af22b0b4e41da31e868d57226121c84
+
+$ echo "hello, world" | strconv length
+12
+
+$ echo "hello, world" | strconv b64enc
+aGVsbG8sIHdvcmxk
+
+$ echo "aGVsbG8sIHdvcmxk" | strconv b64dec
+hello, world
+
+$ echo "https://cixtor.com/?foo=bar&lorem=ipsum" | strconv urlenc
+https%3A%2F%2Fcixtor.com%2F%3Ffoo%3Dbar%26lorem%3Dipsum
+
+$ echo "https%3A%2F%2Fcixtor.com%2F%3Ffoo%3Dbar%26lorem%3Dipsum" | strconv urldec
+https://cixtor.com/?foo=bar&lorem=ipsum
+
+$ echo "hello, world" | strconv rotate
+uryyb, jbeyq
+
+$ echo "uryyb, jbeyq" | strconv rotate
+hello, world
+```
