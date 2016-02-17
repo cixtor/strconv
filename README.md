@@ -64,3 +64,22 @@ uryyb, jbeyq
 $ echo "uryyb, jbeyq" | strconv rotate
 hello, world
 ```
+
+### Aliases:
+
+Add these aliases to your `~/.profile` file to maximize the usability.
+
+```shell
+alias replace="strconv replace"
+alias capitalize="strconv capitalize"
+alias upper="strconv uppercase"
+alias lower="strconv lowercase"
+alias md5="strconv md5"
+alias sha1="strconv sha1"
+alias len="strconv length"
+alias b64enc="strconv b64enc"
+alias b64dec="strconv b64dec"
+alias urldec="strconv urldec"
+alias urlenc="strconv urlenc"
+alias rotate="strconv rotate"
+```
