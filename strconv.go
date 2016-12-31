@@ -10,22 +10,6 @@ import (
 	"strings"
 )
 
-// Converter is the abstract object.
-type Converter interface {
-	Replace(string) string
-	Capitalize(string) string
-	Uppercase(string) string
-	Lowercase(string) string
-	Md5(string) string
-	Sha1(string) string
-	Length(string) int
-	Base64Encode(string) string
-	Base64Decode(string) string
-	URLDecode(string) string
-	URLEncode(string) string
-	Rotate(string) string
-}
-
 // Application is the implementation.
 type Application struct{}
 
