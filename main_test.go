@@ -80,25 +80,25 @@ func TestBase64Decode(t *testing.T) {
 	}
 }
 
-func TestUrlDecode(t *testing.T) {
+func TestURLDecode(t *testing.T) {
 	var app Application
 
 	initial := "https%3A%2F%2Fcixtor.com%2F%3Ffoo%3Dbar%26lorem%3Dipsum"
 	expected := "https://cixtor.com/?foo=bar&lorem=ipsum"
 
-	if app.UrlDecode(initial) != expected {
-		t.Fatalf("UrlDecode did not run as expected")
+	if app.URLDecode(initial) != expected {
+		t.Fatalf("URLDecode did not run as expected")
 	}
 }
 
-func TestUrlEncode(t *testing.T) {
+func TestURLEncode(t *testing.T) {
 	var app Application
 
 	initial := "https://cixtor.com/?foo=bar&lorem=ipsum"
 	expected := "https%3A%2F%2Fcixtor.com%2F%3Ffoo%3Dbar%26lorem%3Dipsum"
 
-	if app.UrlEncode(initial) != expected {
-		t.Fatalf("UrlEncode did not run as expected")
+	if app.URLEncode(initial) != expected {
+		t.Fatalf("URLEncode did not run as expected")
 	}
 }
 

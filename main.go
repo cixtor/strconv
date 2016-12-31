@@ -82,10 +82,10 @@ func main() {
 		fmt.Println(app.Base64Decode(text))
 		break
 	case "urldec":
-		fmt.Println(app.UrlDecode(text))
+		fmt.Println(app.URLDecode(text))
 		break
 	case "urlenc":
-		fmt.Println(app.UrlEncode(text))
+		fmt.Println(app.URLEncode(text))
 		break
 	case "rotate":
 		fmt.Println(app.Rotate(text))
