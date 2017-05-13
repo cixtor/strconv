@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -71,6 +72,28 @@ func (app Application) Sha1(text string) string {
 	io.WriteString(hash, text)
 
 	return fmt.Sprintf("%x", hash.Sum(nil))
+}
+
+// Chunk splits a string into smaller chunks, default: 64.
+func (app Application) Chunk(text string, length string) string {
+	limit, err := strconv.Atoi(length)
+
+	if err != nil {
+		limit = 64
+	}
+
+	var counter int
+	var result string
+	total := len(text)
+	for i := 0; i < total; i++ {
+		counter++
+		result += text[i : i+1]
+		if counter >= limit {
+			counter = 0
+			result += "\n"
+		}
+	}
+	return result
 }
 
 // Length measures the arbitrary (but finite) length of a chain of letters.

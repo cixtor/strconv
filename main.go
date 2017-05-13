@@ -25,6 +25,7 @@ func main() {
 		fmt.Println("  echo [text] | strconv lowercase")
 		fmt.Println("  echo [text] | strconv md5")
 		fmt.Println("  echo [text] | strconv sha1")
+		fmt.Println("  echo [text] | strconv chunk")
 		fmt.Println("  echo [text] | strconv length")
 		fmt.Println("  echo [text] | strconv b64enc")
 		fmt.Println("  echo [text] | strconv b64dec")
@@ -71,6 +72,9 @@ func main() {
 		break
 	case "sha1":
 		fmt.Println(app.Sha1(text))
+		break
+	case "chunk":
+		fmt.Println(app.Chunk(text, flag.Arg(1)))
 		break
 	case "length":
 		fmt.Println(app.Length(text))
