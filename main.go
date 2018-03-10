@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -52,59 +53,61 @@ func main() {
 		fmt.Println("read err;", err)
 		os.Exit(1)
 	}
-	text := string(body)
+	text := strings.TrimSpace(string(body))
 
 	switch action {
 	case "replace":
-		fmt.Println(app.Replace(text, flag.Arg(1), flag.Arg(2)))
+		text = app.Replace(text, flag.Arg(1), flag.Arg(2))
 		break
 
 	case "capitalize":
-		fmt.Println(app.Capitalize(text))
+		text = app.Capitalize(text)
 		break
 
 	case "uppercase":
-		fmt.Println(app.Uppercase(text))
+		text = app.Uppercase(text)
 		break
 
 	case "lowercase":
-		fmt.Println(app.Lowercase(text))
+		text = app.Lowercase(text)
 		break
 
 	case "md5":
-		fmt.Println(app.Md5(text))
+		text = app.Md5(text)
 		break
 
 	case "sha1":
-		fmt.Println(app.Sha1(text))
+		text = app.Sha1(text)
 		break
 
 	case "chunk":
-		fmt.Println(app.Chunk(text, flag.Arg(1)))
+		text = app.Chunk(text, flag.Arg(1))
 		break
 
 	case "length":
-		fmt.Println(app.Length(text))
+		text = fmt.Sprintf("%d", app.Length(text))
 		break
 
 	case "b64enc":
-		fmt.Println(app.Base64Encode(text))
+		text = app.Base64Encode(text)
 		break
 
 	case "b64dec":
-		fmt.Println(app.Base64Decode(text))
+		text = app.Base64Decode(text)
 		break
 
 	case "urldec":
-		fmt.Println(app.URLDecode(text))
+		text = app.URLDecode(text)
 		break
 
 	case "urlenc":
-		fmt.Println(app.URLEncode(text))
+		text = app.URLEncode(text)
 		break
 
 	case "rotate":
-		fmt.Println(app.Rotate(text))
+		text = app.Rotate(text)
 		break
 	}
+
+	fmt.Println(text)
 }
