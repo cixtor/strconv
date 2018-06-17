@@ -22,6 +22,9 @@ func (app Application) Replace(text string, old string, new string) string {
 	/* support the replacement of new lines */
 	old = strings.Replace(old, "\\n", "\n", -1)
 	new = strings.Replace(new, "\\n", "\n", -1)
+	/* support the replacement of hard tabs */
+	old = strings.Replace(old, "\\t", "\t", -1)
+	new = strings.Replace(new, "\\t", "\t", -1)
 	return strings.Replace(text, old, new, -1)
 }
 
