@@ -18,8 +18,11 @@ type Application struct{}
 // replaced with a replacement term. This operation is case sensitive. If the
 // replacement term is unspecified or empty, all occurrences of the search term
 // will be removed from the string.
-func (app Application) Replace(text string, old string, _new string) string {
-	return strings.Replace(text, old, _new, -1)
+func (app Application) Replace(text string, old string, new string) string {
+	/* support the replacement of new lines */
+	old = strings.Replace(old, "\\n", "\n", -1)
+	new = strings.Replace(new, "\\n", "\n", -1)
+	return strings.Replace(text, old, new, -1)
 }
 
 // Capitalize will write a word with its first letter as a capital letter
