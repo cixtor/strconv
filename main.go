@@ -58,55 +58,30 @@ func main() {
 	switch action {
 	case "replace":
 		text = app.Replace(text, flag.Arg(1), flag.Arg(2))
-		break
-
 	case "capitalize":
 		text = app.Capitalize(text)
-		break
-
 	case "uppercase":
 		text = app.Uppercase(text)
-		break
-
 	case "lowercase":
 		text = app.Lowercase(text)
-		break
-
 	case "md5":
 		text = app.Md5(text)
-		break
-
 	case "sha1":
 		text = app.Sha1(text)
-		break
-
 	case "chunk":
 		text = app.Chunk(text, flag.Arg(1))
-		break
-
 	case "length":
 		text = fmt.Sprintf("%d", app.Length(text))
-		break
-
 	case "b64enc":
 		text = app.Base64Encode(text)
-		break
-
 	case "b64dec":
 		text = app.Base64Decode(text)
-		break
-
 	case "urldec":
 		text = app.URLDecode(text)
-		break
-
 	case "urlenc":
 		text = app.URLEncode(text)
-		break
-
 	case "rotate":
 		text = app.Rotate(text)
-		break
 	}
 
 	fmt.Println(text)
