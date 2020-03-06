@@ -80,7 +80,7 @@ func (app Application) Sha1(text string) string {
 	return fmt.Sprintf("%x", hash.Sum(nil))
 }
 
-// Chunk splits a string into smaller chunks, default: 64.
+// Chunk splits a string into smaller pieces, default: 64.
 func (app Application) Chunk(text string, length string) string {
 	limit, err := strconv.Atoi(length)
 
