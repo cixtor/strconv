@@ -55,9 +55,19 @@ func main() {
 	}
 	text := strings.TrimSpace(string(body))
 
+	// NOTES(cixtor): we could use flag.Args instead but this forces us to add
+	// array index checking in each function to make sure we are not reading
+	// from an out of range position. Function flag.Arg guarantees a string no
+	// matter if the value is missing from the list of command line arguments.
+	app.args = []string{
+		flag.Arg(1),
+		flag.Arg(2),
+		flag.Arg(3),
+	}
+
 	switch action {
 	case "replace":
-		text = app.Replace(text, flag.Arg(1), flag.Arg(2))
+		text = app.Replace(text)
 	case "capitalize":
 		text = app.Capitalize(text)
 	case "uppercase":
@@ -69,7 +79,7 @@ func main() {
 	case "sha1":
 		text = app.Sha1(text)
 	case "chunk":
-		text = app.Chunk(text, flag.Arg(1))
+		text = app.Chunk(text)
 	case "length":
 		text = fmt.Sprintf("%d", app.Length(text))
 	case "b64enc":

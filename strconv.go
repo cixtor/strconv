@@ -12,13 +12,17 @@ import (
 )
 
 // Application is the implementation.
-type Application struct{}
+type Application struct {
+	args []string
+}
 
 // Replace returns the given string with all occurrences of a search term
 // replaced with a replacement term. This operation is case sensitive. If the
 // replacement term is unspecified or empty, all occurrences of the search term
 // will be removed from the string.
-func (app Application) Replace(text string, old string, new string) string {
+func (app Application) Replace(text string) string {
+	old := app.args[0]
+	new := app.args[1]
 	/* support the replacement of new lines */
 	old = strings.Replace(old, "\\n", "\n", -1)
 	new = strings.Replace(new, "\\n", "\n", -1)
@@ -81,8 +85,8 @@ func (app Application) Sha1(text string) string {
 }
 
 // Chunk splits a string into smaller pieces, default: 64.
-func (app Application) Chunk(text string, length string) string {
-	limit, err := strconv.Atoi(length)
+func (app Application) Chunk(text string) string {
+	limit, err := strconv.Atoi(app.args[0])
 
 	if err != nil {
 		limit = 64
@@ -91,14 +95,17 @@ func (app Application) Chunk(text string, length string) string {
 	var counter int
 	var result string
 	total := len(text)
+
 	for i := 0; i < total; i++ {
 		counter++
 		result += text[i : i+1]
+
 		if counter >= limit {
 			counter = 0
 			result += "\n"
 		}
 	}
+
 	return result
 }
 
