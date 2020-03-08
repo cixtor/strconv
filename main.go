@@ -81,7 +81,7 @@ func main() {
 	case "chunk":
 		text = app.Chunk(text)
 	case "length":
-		text = fmt.Sprintf("%d", app.Length(text))
+		text = app.Length(text)
 	case "b64enc":
 		text = app.Base64Encode(text)
 	case "b64dec":
