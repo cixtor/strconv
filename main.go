@@ -65,33 +65,24 @@ func main() {
 		flag.Arg(3),
 	}
 
-	switch action {
-	case "replace":
-		text = app.Replace(text)
-	case "capitalize":
-		text = app.Capitalize(text)
-	case "uppercase":
-		text = app.Uppercase(text)
-	case "lowercase":
-		text = app.Lowercase(text)
-	case "md5":
-		text = app.Md5(text)
-	case "sha1":
-		text = app.Sha1(text)
-	case "chunk":
-		text = app.Chunk(text)
-	case "length":
-		text = app.Length(text)
-	case "b64enc":
-		text = app.Base64Encode(text)
-	case "b64dec":
-		text = app.Base64Decode(text)
-	case "urldec":
-		text = app.URLDecode(text)
-	case "urlenc":
-		text = app.URLEncode(text)
-	case "rotate":
-		text = app.Rotate(text)
+	actions := map[string]Command{
+		"replace":    app.Replace,
+		"capitalize": app.Capitalize,
+		"uppercase":  app.Uppercase,
+		"lowercase":  app.Lowercase,
+		"md5":        app.Md5,
+		"sha1":       app.Sha1,
+		"chunk":      app.Chunk,
+		"length":     app.Length,
+		"b64enc":     app.Base64Encode,
+		"b64dec":     app.Base64Decode,
+		"urldec":     app.URLDecode,
+		"urlenc":     app.URLEncode,
+		"rotate":     app.Rotate,
+	}
+
+	if function, ok := actions[action]; ok {
+		text = function(text)
 	}
 
 	fmt.Println(text)

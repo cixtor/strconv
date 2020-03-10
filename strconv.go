@@ -16,6 +16,9 @@ type Application struct {
 	args []string
 }
 
+// Command represents the function signature of every action.
+type Command func(string) string
+
 // Replace returns the given string with all occurrences of a search term
 // replaced with a replacement term. This operation is case sensitive. If the
 // replacement term is unspecified or empty, all occurrences of the search term
