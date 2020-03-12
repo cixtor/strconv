@@ -25,8 +25,8 @@ String functions are used in computer programming languages to manipulate a stri
 ## Usage
 
 ```sh
-$ echo "Hello, World" | strconv replace o @
-Hell@, W@rld
+$ echo "Hello, World" | strconv replace o:@ l:x
+Hexx@, W@rxd
 
 $ echo "hello, world" | strconv capitalize
 Hello, World

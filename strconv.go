@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/url"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -19,20 +20,43 @@ type Application struct {
 // Command represents the function signature of every action.
 type Command func(string) string
 
+// Arg returns the i'th argument. Arg(0) is the first remaining argument
+// after flags have been processed. Arg returns an empty string if the
+// requested element does not exist.
+func (app Application) Arg(i int) string {
+	if i < 0 || i >= len(app.args) {
+		return ""
+	}
+	return app.args[i]
+}
+
 // Replace returns the given string with all occurrences of a search term
 // replaced with a replacement term. This operation is case sensitive. If the
 // replacement term is unspecified or empty, all occurrences of the search term
 // will be removed from the string.
 func (app Application) Replace(text string) string {
-	old := app.args[0]
-	new := app.args[1]
-	/* support the replacement of new lines */
-	old = strings.Replace(old, "\\n", "\n", -1)
-	new = strings.Replace(new, "\\n", "\n", -1)
-	/* support the replacement of hard tabs */
-	old = strings.Replace(old, "\\t", "\t", -1)
-	new = strings.Replace(new, "\\t", "\t", -1)
-	return strings.Replace(text, old, new, -1)
+	var old string
+	var new string
+
+	for _, query := range app.args {
+		// NOTES(cixtor): support the replacement of new lines.
+		query = strings.Replace(query, "\\n", "\n", -1)
+
+		// NOTES(cixtor): support the replacement of hard tabs.
+		query = strings.Replace(query, "\\t", "\t", -1)
+
+		if len(query) != 3 {
+			fmt.Printf("invalid argument; `%s` must be 3 characters long\n", query)
+			os.Exit(1)
+		}
+
+		old = query[0:1]
+		new = query[2:3]
+
+		text = strings.Replace(text, old, new, -1)
+	}
+
+	return text
 }
 
 // Capitalize will write a word with its first letter as a capital letter
@@ -89,7 +113,7 @@ func (app Application) Sha1(text string) string {
 
 // Chunk splits a string into smaller pieces, default: 64.
 func (app Application) Chunk(text string) string {
-	limit, err := strconv.Atoi(app.args[0])
+	limit, err := strconv.Atoi(app.Arg(1))
 
 	if err != nil {
 		limit = 64

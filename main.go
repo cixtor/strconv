@@ -19,13 +19,13 @@ func main() {
 		fmt.Println("https://en.wikipedia.org/wiki/String_(computer_science)")
 		fmt.Println()
 		fmt.Println("Usage:")
-		fmt.Println("  echo [text] | strconv replace")
+		fmt.Println("  echo [text] | strconv replace [a:b m:n x:y]")
 		fmt.Println("  echo [text] | strconv capitalize")
 		fmt.Println("  echo [text] | strconv uppercase")
 		fmt.Println("  echo [text] | strconv lowercase")
 		fmt.Println("  echo [text] | strconv md5")
 		fmt.Println("  echo [text] | strconv sha1")
-		fmt.Println("  echo [text] | strconv chunk")
+		fmt.Println("  echo [text] | strconv chunk 64")
 		fmt.Println("  echo [text] | strconv length")
 		fmt.Println("  echo [text] | strconv b64enc")
 		fmt.Println("  echo [text] | strconv b64dec")
@@ -55,15 +55,7 @@ func main() {
 	}
 	text := strings.TrimSpace(string(body))
 
-	// NOTES(cixtor): we could use flag.Args instead but this forces us to add
-	// array index checking in each function to make sure we are not reading
-	// from an out of range position. Function flag.Arg guarantees a string no
-	// matter if the value is missing from the list of command line arguments.
-	app.args = []string{
-		flag.Arg(1),
-		flag.Arg(2),
-		flag.Arg(3),
-	}
+	app.args = flag.Args()
 
 	actions := map[string]Command{
 		"replace":    app.Replace,
