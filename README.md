@@ -58,10 +58,10 @@ https%3A%2F%2Fcixtor.com%2F%3Ffoo%3Dbar%26lorem%3Dipsum
 $ echo "https%3A%2F%2Fcixtor.com%2F%3Ffoo%3Dbar%26lorem%3Dipsum" | strconv urldec
 https://cixtor.com/?foo=bar&lorem=ipsum
 
-$ echo "hello, world" | strconv rotate
+$ echo "hello, world" | strconv rotate 13
 uryyb, jbeyq
 
-$ echo "uryyb, jbeyq" | strconv rotate
+$ echo "uryyb, jbeyq" | strconv rotate 13
 hello, world
 ```
 

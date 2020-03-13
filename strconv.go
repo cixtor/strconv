@@ -113,7 +113,7 @@ func (app Application) Sha1(text string) string {
 
 // Chunk splits a string into smaller pieces, default: 64.
 func (app Application) Chunk(text string) string {
-	limit, err := strconv.Atoi(app.Arg(1))
+	limit, err := strconv.Atoi(app.Arg(0))
 
 	if err != nil {
 		limit = 64
@@ -215,8 +215,13 @@ func (app Application) URLDecode(text string) string {
 // characters untouched. Encoding and decoding are done by the same function,
 // passing an encoded string as argument will return the original version.
 func (app Application) Rotate(text string) string {
+	number, err := strconv.Atoi(app.Arg(0))
+
+	if err != nil {
+		number = 13
+	}
+
 	rotator := func(char rune) rune {
-		number := 13
 		switch {
 		case char >= 'A' && char <= 'Z':
 			return 'A' + (char-'A'+rune(number))%26
