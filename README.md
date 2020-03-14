@@ -24,43 +24,91 @@ String functions are used in computer programming languages to manipulate a stri
 
 ## Usage
 
+Replace all occurrences of the character on the left with the character on the right in STDIN. Example, replace all occurrences of the letter `o` with the special character `@` and then replace all occurrences of the letter `l` with the letter `x`.
+
 ```sh
 $ echo "Hello, World" | strconv replace o:@ l:x
 Hexx@, W@rxd
+```
 
+Capitalize the first letter of every word.
+
+```sh
 $ echo "hello, world" | strconv capitalize
 Hello, World
+```
 
+Convert all characters in the text to upper case.
+
+```sh
 $ echo "hello, world" | strconv uppercase
 HELLO, WORLD
+```
 
+Convert all characters in the text to lower case.
+
+```sh
 $ echo "HELLO, WORLD" | strconv lowercase
 hello, world
+```
 
+Print the MD5 hash of the entire text.
+
+```sh
 $ echo "hello, world" | strconv md5
 e4d7f1b4ed2e42d15898f4b27b019da4
+```
 
+Print the SHA1 hash of the entire text.
+
+```sh
 $ echo "hello, world" | strconv sha1
 b7e23ec29af22b0b4e41da31e868d57226121c84
+```
 
+Print the length of the entire text.
+
+```sh
 $ echo "hello, world" | strconv length
 12
+```
 
+Encode entire text as Base64.
+
+```sh
 $ echo "hello, world" | strconv b64enc
 aGVsbG8sIHdvcmxk
+```
 
+Decode Base64-encoded text.
+
+```sh
 $ echo "aGVsbG8sIHdvcmxk" | strconv b64dec
 hello, world
+```
 
+Encode URL to prepare submission of data using GET requests.
+
+```sh
 $ echo "https://cixtor.com/?foo=bar&lorem=ipsum" | strconv urlenc
 https%3A%2F%2Fcixtor.com%2F%3Ffoo%3Dbar%26lorem%3Dipsum
+```
 
+Decode URL encoded to safely transmit data using GET requests.
+
+```sh
 $ echo "https%3A%2F%2Fcixtor.com%2F%3Ffoo%3Dbar%26lorem%3Dipsum" | strconv urldec
 https://cixtor.com/?foo=bar&lorem=ipsum
+```
 
+Rotate text N characters to the right, where N is any natural number.
+
+```sh
 $ echo "hello, world" | strconv rotate 13
 uryyb, jbeyq
+```
 
+```sh
 $ echo "uryyb, jbeyq" | strconv rotate 13
 hello, world
 ```
