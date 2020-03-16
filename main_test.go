@@ -9,7 +9,7 @@ const text = "tf GO1Qnn7S60 WqsxKdVFQ7 nnnFQnsVD1n5MPpVqBnNrraQd2"
 func TestReplace(t *testing.T) {
 	var app Application
 
-	app.args = []string{"n:@", "s:x", "r:h"}
+	app.args = []string{"replace", "n:@", "s:x", "r:h"}
 
 	if app.Replace(text) != "tf GO1Q@@7S60 WqxxKdVFQ7 @@@FQ@xVD1@5MPpVqB@NhhaQd2" {
 		t.Fatalf("Replace did not run as expected")
@@ -19,7 +19,7 @@ func TestReplace(t *testing.T) {
 func TestReplaceDouble(t *testing.T) {
 	var app Application
 
-	app.args = []string{"n:@", "n:&", "n:="}
+	app.args = []string{"replace", "n:@", "n:&", "n:="}
 
 	if app.Replace(text) != "tf GO1Q@@7S60 WqsxKdVFQ7 @@@FQ@sVD1@5MPpVqB@NrraQd2" {
 		t.Fatalf("Replace did not run as expected")
@@ -29,7 +29,7 @@ func TestReplaceDouble(t *testing.T) {
 func TestReplaceSequence(t *testing.T) {
 	var app Application
 
-	app.args = []string{"n:@", "@:&", "&:="}
+	app.args = []string{"replace", "n:@", "@:&", "&:="}
 
 	if app.Replace(text) != "tf GO1Q==7S60 WqsxKdVFQ7 ===FQ=sVD1=5MPpVqB=NrraQd2" {
 		t.Fatalf("Replace did not run as expected")
@@ -39,7 +39,7 @@ func TestReplaceSequence(t *testing.T) {
 func TestReplaceNewLine1(t *testing.T) {
 	var app Application
 
-	app.args = []string{"\\n:@"}
+	app.args = []string{"replace", "\\n:@"}
 
 	if app.Replace("hello\nworld") != "hello@world" {
 		t.Fatalf("Replace did not run as expected")
@@ -49,7 +49,7 @@ func TestReplaceNewLine1(t *testing.T) {
 func TestReplaceNewLine2(t *testing.T) {
 	var app Application
 
-	app.args = []string{"@:\\n"}
+	app.args = []string{"replace", "@:\\n"}
 
 	if app.Replace("hello@world") != "hello\nworld" {
 		t.Fatalf("Replace did not run as expected")
@@ -59,7 +59,7 @@ func TestReplaceNewLine2(t *testing.T) {
 func TestReplaceTabulation1(t *testing.T) {
 	var app Application
 
-	app.args = []string{"\\t:@"}
+	app.args = []string{"replace", "\\t:@"}
 
 	if app.Replace("hello\tworld") != "hello@world" {
 		t.Fatalf("Replace did not run as expected")
@@ -69,7 +69,7 @@ func TestReplaceTabulation1(t *testing.T) {
 func TestReplaceTabulation2(t *testing.T) {
 	var app Application
 
-	app.args = []string{"@:\\t"}
+	app.args = []string{"replace", "@:\\t"}
 
 	if app.Replace("hello@world") != "hello\tworld" {
 		t.Fatalf("Replace did not run as expected")
@@ -185,7 +185,7 @@ func TestRotate13(t *testing.T) {
 func TestRotate5(t *testing.T) {
 	var app Application
 
-	app.args = []string{"5"}
+	app.args = []string{"replace", "5"}
 
 	if app.Rotate(text) != "yk LT1Vss7X60 BvxcPiAKV7 sssKVsxAI1s5RUuAvGsSwwfVi2" {
 		t.Fatalf("Rotate did not run as expected")

@@ -38,7 +38,12 @@ func (app Application) Replace(text string) string {
 	var old string
 	var new string
 
-	for _, query := range app.args {
+	for idx, query := range app.args {
+		// NOTES(cixtor): skip command name from the argument list.
+		if idx == 0 {
+			continue
+		}
+
 		// NOTES(cixtor): support the replacement of new lines.
 		query = strings.Replace(query, "\\n", "\n", -1)
 
@@ -94,7 +99,7 @@ func (app Application) Lowercase(text string) string {
 func (app Application) Md5(text string) string {
 	hash := md5.New()
 
-	io.WriteString(hash, text)
+	_, _ = io.WriteString(hash, text)
 
 	return fmt.Sprintf("%x", hash.Sum(nil))
 }
@@ -106,14 +111,14 @@ func (app Application) Md5(text string) string {
 func (app Application) Sha1(text string) string {
 	hash := sha1.New()
 
-	io.WriteString(hash, text)
+	_, _ = io.WriteString(hash, text)
 
 	return fmt.Sprintf("%x", hash.Sum(nil))
 }
 
 // Chunk splits a string into smaller pieces, default: 64.
 func (app Application) Chunk(text string) string {
-	limit, err := strconv.Atoi(app.Arg(0))
+	limit, err := strconv.Atoi(app.Arg(1))
 
 	if err != nil {
 		limit = 64
@@ -215,7 +220,7 @@ func (app Application) URLDecode(text string) string {
 // characters untouched. Encoding and decoding are done by the same function,
 // passing an encoded string as argument will return the original version.
 func (app Application) Rotate(text string) string {
-	number, err := strconv.Atoi(app.Arg(0))
+	number, err := strconv.Atoi(app.Arg(1))
 
 	if err != nil {
 		number = 13
