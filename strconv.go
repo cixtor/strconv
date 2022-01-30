@@ -215,26 +215,26 @@ func (app Application) URLDecode(text string) string {
 	return out
 }
 
-// Rotate performs the rot13 transform on a string. The ROT13 encoding simply
+// rotate performs the rot13 transform on a string. The ROT13 encoding simply
 // shifts every letter by 13 places in the alphabet while leaving non-alpha
 // characters untouched. Encoding and decoding are done by the same function,
 // passing an encoded string as argument will return the original version.
-func (app Application) Rotate(text string) string {
-	number, err := strconv.Atoi(app.Arg(1))
+func rotate(text []byte, number string) []byte {
+	n, err := strconv.Atoi(number)
 
 	if err != nil {
-		number = 13
+		n = 13
 	}
 
 	rotator := func(char rune) rune {
 		switch {
 		case char >= 'A' && char <= 'Z':
-			return 'A' + (char-'A'+rune(number))%26
+			return 'A' + (char-'A'+rune(n))%26
 		case char >= 'a' && char <= 'z':
-			return 'a' + (char-'a'+rune(number))%26
+			return 'a' + (char-'a'+rune(n))%26
 		}
 		return char
 	}
 
-	return strings.Map(rotator, text)
+	return bytes.Map(rotator, text)
 }
