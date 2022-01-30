@@ -196,7 +196,7 @@ func (app Application) URLEncode(text string) string {
 	return url.QueryEscape(text)
 }
 
-// URLDecode decodes a chain of letters using the percent-encoding technique.
+// urlDecode decodes a chain of letters using the percent-encoding technique.
 // Percent-encoding, also known as URL encoding, is a mechanism for encoding
 // information in a Uniform Resource Identifier (URI) under certain
 // circumstances. Although it is known as URL encoding it is, in fact, used more
@@ -205,14 +205,12 @@ func (app Application) URLEncode(text string) string {
 // As such, it is also used in the preparation of data of the application/x-www-
 // form-urlencoded media type, as is often used in the submission of HTML form
 // data in HTTP requests.
-func (app Application) URLDecode(text string) string {
-	out, err := url.QueryUnescape(text)
-
+func urlDecode(text []byte) []byte {
+	out, err := url.QueryUnescape(string(text))
 	if err != nil {
-		panic(err)
+		return []byte(err.Error())
 	}
-
-	return out
+	return []byte(out)
 }
 
 // rotate performs the rot13 transform on a string. The ROT13 encoding simply
