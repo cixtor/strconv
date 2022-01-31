@@ -183,7 +183,7 @@ func (app Application) Base64Decode(text string) string {
 	return fmt.Sprintf("%s", out)
 }
 
-// URLEncode encodes a chain of letters using the percent-encoding technique.
+// urlEncode encodes a chain of letters using the percent-encoding technique.
 // Percent-encoding, also known as URL encoding, is a mechanism for encoding
 // information in a Uniform Resource Identifier (URI) under certain
 // circumstances. Although it is known as URL encoding it is, in fact, used more
@@ -192,8 +192,11 @@ func (app Application) Base64Decode(text string) string {
 // As such, it is also used in the preparation of data of the application/x-www-
 // form-urlencoded media type, as is often used in the submission of HTML form
 // data in HTTP requests.
-func (app Application) URLEncode(text string) string {
-	return url.QueryEscape(text)
+func urlEncode(text []byte) []byte {
+	if text[len(text)-1] == '\n' {
+		text = text[0 : len(text)-1]
+	}
+	return []byte(url.QueryEscape(string(text)))
 }
 
 // urlDecode decodes a chain of letters using the percent-encoding technique.
