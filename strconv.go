@@ -168,19 +168,17 @@ func (app Application) Base64Encode(text string) string {
 	return base64.StdEncoding.EncodeToString([]byte(text))
 }
 
-// Base64Decode decodes data encoded with MIME base64. Base64 is a group of
+// base64Decode decodes data encoded with MIME base64. Base64 is a group of
 // similar binary-to-text encoding schemes that represent binary data in an
 // ASCII string format by translating it into a radix-64 representation. The
 // term Base64 originates from a specific MIME content transfer encoding. Each
 // base64 digit represents exactly 6 bits of data.
-func (app Application) Base64Decode(text string) string {
-	out, err := base64.StdEncoding.DecodeString(text)
-
-	if err != nil {
-		panic(err)
+func base64Decode(text []byte) []byte {
+	dst := make([]byte, base64.StdEncoding.DecodedLen(len(text)))
+	if _, err := base64.StdEncoding.Decode(dst, text); err != nil {
+		return []byte(err.Error())
 	}
-
-	return fmt.Sprintf("%s", out)
+	return dst
 }
 
 // urlEncode encodes a chain of letters using the percent-encoding technique.
