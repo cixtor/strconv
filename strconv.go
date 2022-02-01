@@ -159,13 +159,15 @@ func (app Application) Length(text string) string {
 	return fmt.Sprintf("%d", len(text))
 }
 
-// Base64Encode encodes data with MIME base64. Base64 is a group of similar
+// base64Encode encodes data with MIME base64. Base64 is a group of similar
 // binary-to-text encoding schemes that represent binary data in an ASCII string
 // format by translating it into a radix-64 representation. The term Base64
 // originates from a specific MIME content transfer encoding. Each base64 digit
 // represents exactly 6 bits of data.
-func (app Application) Base64Encode(text string) string {
-	return base64.StdEncoding.EncodeToString([]byte(text))
+func base64Encode(text []byte) []byte {
+	dst := make([]byte, base64.StdEncoding.EncodedLen(len(text)))
+	base64.StdEncoding.Encode(dst, text)
+	return append(dst, byte('\n'))
 }
 
 // base64Decode decodes data encoded with MIME base64. Base64 is a group of
