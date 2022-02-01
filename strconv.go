@@ -141,7 +141,7 @@ func (app Application) Chunk(text string) string {
 	return result
 }
 
-// Length measures the arbitrary (but finite) length of a chain of letters.
+// length measures the arbitrary (but finite) length of a chain of letters.
 // Although formal strings can have an arbitrary (but finite) length, the length
 // of strings in real languages is often constrained to an artificial maximum.
 // In general, there are two types of string datatypes: fixed-length strings,
@@ -155,8 +155,11 @@ func (app Application) Chunk(text string) string {
 // computer memory. The string length can be stored as a separate integer (which
 // may put an artificial limit on the length) or implicitly through a
 // termination character, usually a character value with all bits zero.
-func (app Application) Length(text string) string {
-	return fmt.Sprintf("%d", len(text))
+func length(text []byte, verbose string) []byte {
+	if verbose == "-v" {
+		return []byte(fmt.Sprintf("[%d]string{%q}\n", len(text), text))
+	}
+	return []byte(fmt.Sprintf("%d\n", len(text)))
 }
 
 // base64Encode encodes data with MIME base64. Base64 is a group of similar
