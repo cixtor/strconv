@@ -104,16 +104,14 @@ func (app Application) Md5(text string) string {
 	return fmt.Sprintf("%x", hash.Sum(nil))
 }
 
-// Sha1 message-digest algorithm. This algorithm takes a message and generates a
+// SHA1 message-digest algorithm. This algorithm takes a message and generates a
 // 160-bit digest from the input. The SHA1 algorithm is related to the MD4
 // algorithm but has been strengthend against certain types of cryptographic
 // attack. SHA1 should be used in preference to MD4 or MD5 in new applications.
-func (app Application) Sha1(text string) string {
-	hash := sha1.New()
-
-	_, _ = io.WriteString(hash, text)
-
-	return fmt.Sprintf("%x", hash.Sum(nil))
+func hashSHA1(text []byte) []byte {
+	hash := sha1.Sum(text)
+	hstr := hex.EncodeToString(hash[:])
+	return []byte(hstr)
 }
 
 // chunk splits a string into smaller pieces, default: 64.
