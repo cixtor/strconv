@@ -116,29 +116,29 @@ func (app Application) Sha1(text string) string {
 	return fmt.Sprintf("%x", hash.Sum(nil))
 }
 
-// Chunk splits a string into smaller pieces, default: 64.
-func (app Application) Chunk(text string) string {
-	limit, err := strconv.Atoi(app.Arg(1))
+// chunk splits a string into smaller pieces, default: 64.
+func chunk(text []byte, number string) []byte {
+	limit, err := strconv.Atoi(number)
 
 	if err != nil {
 		limit = 64
 	}
 
 	var counter int
-	var result string
+	var result []byte
 	total := len(text)
 
 	for i := 0; i < total; i++ {
 		counter++
-		result += text[i : i+1]
+		result = append(result, text[i:i+1]...)
 
 		if counter >= limit {
 			counter = 0
-			result += "\n"
+			result = append(result, byte('\n'))
 		}
 	}
 
-	return result
+	return result[0:] // remove last new line.
 }
 
 // length measures the arbitrary (but finite) length of a chain of letters.
