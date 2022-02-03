@@ -83,7 +83,7 @@ func (app Application) Uppercase(text string) string {
 	return strings.ToUpper(text)
 }
 
-// Lowercase - Letter case (or just case) is the distinction between the letters
+// lowercase - Letter case (or just case) is the distinction between the letters
 // that are in larger upper case (also uppercase, capital letters, capitals,
 // caps, large letters, or more formally majuscule) and smaller lower case (also
 // lowercase, small letters, or more formally minuscule) in the written
@@ -91,8 +91,8 @@ func (app Application) Uppercase(text string) string {
 // sometimes used for artistic effect, such as in poetry. Also commonly seen in
 // computer commands, and in SMS language (avoiding the shift key, to type more
 // quickly).
-func (app Application) Lowercase(text string) string {
-	return strings.ToLower(text)
+func lowercase(text []byte) []byte {
+	return bytes.ToLower(text)
 }
 
 // MD5 calculates a message-digest fingerprint (checksum) for a file.
