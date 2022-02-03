@@ -95,13 +95,11 @@ func (app Application) Lowercase(text string) string {
 	return strings.ToLower(text)
 }
 
-// Md5 calculates a message-digest fingerprint (checksum) for a file.
-func (app Application) Md5(text string) string {
-	hash := md5.New()
-
-	_, _ = io.WriteString(hash, text)
-
-	return fmt.Sprintf("%x", hash.Sum(nil))
+// MD5 calculates a message-digest fingerprint (checksum) for a file.
+func hashMD5(text []byte) []byte {
+	hash := md5.Sum(text)
+	hstr := hex.EncodeToString(hash[:])
+	return []byte(hstr)
 }
 
 // SHA1 message-digest algorithm. This algorithm takes a message and generates a
