@@ -64,12 +64,12 @@ func (app Application) Replace(text string) string {
 	return text
 }
 
-// Capitalize will write a word with its first letter as a capital letter
+// capitalize will write a word with its first letter as a capital letter
 // (upper-case letter) and the remaining letters in lower case in writing
 // systems with a case distinction. The term is also used for the choice of
 // case in text.
-func (app Application) Capitalize(text string) string {
-	return strings.Title(text)
+func capitalize(text []byte) []byte {
+	return bytes.Title(text)
 }
 
 // uppercase - Letter case (or just case) is the distinction between the letters
