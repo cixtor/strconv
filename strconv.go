@@ -72,15 +72,15 @@ func (app Application) Capitalize(text string) string {
 	return strings.Title(text)
 }
 
-// Uppercase - Letter case (or just case) is the distinction between the letters
+// uppercase - Letter case (or just case) is the distinction between the letters
 // that are in larger upper case (also uppercase, capital letters, capitals,
 // caps, large letters, or more formally majuscule) and smaller lower case (also
 // lowercase, small letters, or more formally minuscule) in the written
 // representation of certain languages. Capital letters only. This style can be
 // used in headings and special situations, such as for typographical emphasis
 // in text made on a typewriter.
-func (app Application) Uppercase(text string) string {
-	return strings.ToUpper(text)
+func uppercase(text []byte) []byte {
+	return bytes.ToUpper(text)
 }
 
 // lowercase - Letter case (or just case) is the distinction between the letters
