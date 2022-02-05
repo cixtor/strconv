@@ -1,34 +1,15 @@
 package main
 
 import (
+	"bytes"
 	"crypto/md5"
 	"crypto/sha1"
 	"encoding/base64"
+	"encoding/hex"
 	"fmt"
-	"io"
 	"net/url"
-	"os"
 	"strconv"
-	"strings"
 )
-
-// Application is the implementation.
-type Application struct {
-	args []string
-}
-
-// Command represents the function signature of every action.
-type Command func(string) string
-
-// Arg returns the i'th argument. Arg(0) is the first remaining argument
-// after flags have been processed. Arg returns an empty string if the
-// requested element does not exist.
-func (app Application) Arg(i int) string {
-	if i < 0 || i >= len(app.args) {
-		return ""
-	}
-	return app.args[i]
-}
 
 // replace returns the given string with all occurrences of a search term
 // replaced with a replacement term. This operation is case sensitive. If the
