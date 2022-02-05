@@ -30,38 +30,12 @@ func (app Application) Arg(i int) string {
 	return app.args[i]
 }
 
-// Replace returns the given string with all occurrences of a search term
+// replace returns the given string with all occurrences of a search term
 // replaced with a replacement term. This operation is case sensitive. If the
 // replacement term is unspecified or empty, all occurrences of the search term
 // will be removed from the string.
-func (app Application) Replace(text string) string {
-	var old string
-	var new string
-
-	for idx, query := range app.args {
-		// NOTES(cixtor): skip command name from the argument list.
-		if idx == 0 {
-			continue
-		}
-
-		// NOTES(cixtor): support the replacement of new lines.
-		query = strings.Replace(query, "\\n", "\n", -1)
-
-		// NOTES(cixtor): support the replacement of hard tabs.
-		query = strings.Replace(query, "\\t", "\t", -1)
-
-		if len(query) != 3 {
-			fmt.Printf("invalid argument; `%s` must be 3 characters long\n", query)
-			os.Exit(1)
-		}
-
-		old = query[0:1]
-		new = query[2:3]
-
-		text = strings.Replace(text, old, new, -1)
-	}
-
-	return text
+func replace(text []byte, viejo string, nuevo string) []byte {
+	return bytes.Replace(text, []byte(viejo), []byte(nuevo), -1)
 }
 
 // capitalize will write a word with its first letter as a capital letter
