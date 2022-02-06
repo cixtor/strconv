@@ -46,6 +46,7 @@ func main() {
 
 	if action == "" {
 		flag.Usage()
+		os.Exit(2)
 	}
 
 	reader := io.LimitReader(os.Stdin, 2<<22)
