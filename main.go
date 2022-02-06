@@ -48,7 +48,9 @@ func main() {
 		flag.Usage()
 	}
 
-	body, err := ioutil.ReadAll(os.Stdin)
+	reader := io.LimitReader(os.Stdin, 2<<22)
+	input, err := ioutil.ReadAll(reader)
+
 	if err != nil {
 		fmt.Println("read err;", err)
 		os.Exit(1)
