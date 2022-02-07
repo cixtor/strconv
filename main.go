@@ -3,14 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
-	"strings"
 )
 
 func main() {
-	var app Application
-
 	flag.Usage = func() {
 		fmt.Println("String Conversion")
 		fmt.Println("https://cixtor.com/")
@@ -19,7 +17,7 @@ func main() {
 		fmt.Println("https://en.wikipedia.org/wiki/String_(computer_science)")
 		fmt.Println()
 		fmt.Println("Usage:")
-		fmt.Println("  echo [text] | strconv replace [a:b m:n x:y]")
+		fmt.Println("  echo [text] | strconv replace [old] [new]")
 		fmt.Println("  echo [text] | strconv capitalize")
 		fmt.Println("  echo [text] | strconv uppercase")
 		fmt.Println("  echo [text] | strconv lowercase")
@@ -31,20 +29,17 @@ func main() {
 		fmt.Println("  echo [text] | strconv b64dec")
 		fmt.Println("  echo [text] | strconv urldec")
 		fmt.Println("  echo [text] | strconv urlenc")
-		fmt.Println("  echo [text] | strconv rotate")
+		fmt.Println("  echo [text] | strconv rotate 13")
 		fmt.Println()
 		fmt.Println("Alias:")
 		fmt.Println("  alias upper=\"strconv uppercase\"")
 		fmt.Println("  alias lower=\"strconv lowercase\"")
 		fmt.Println("  alias len=\"strconv length\"")
-		os.Exit(2)
 	}
 
 	flag.Parse()
 
-	action := flag.Arg(0)
-
-	if action == "" {
+	if flag.Arg(0) == "" {
 		flag.Usage()
 		os.Exit(2)
 	}
@@ -56,29 +51,37 @@ func main() {
 		fmt.Println("read err;", err)
 		os.Exit(1)
 	}
-	text := strings.TrimSpace(string(body))
 
-	app.args = flag.Args()
+	var output []byte
 
-	actions := map[string]Command{
-		"replace":    app.Replace,
-		"capitalize": app.Capitalize,
-		"uppercase":  app.Uppercase,
-		"lowercase":  app.Lowercase,
-		"md5":        app.Md5,
-		"sha1":       app.Sha1,
-		"chunk":      app.Chunk,
-		"length":     app.Length,
-		"b64enc":     app.Base64Encode,
-		"b64dec":     app.Base64Decode,
-		"urldec":     app.URLDecode,
-		"urlenc":     app.URLEncode,
-		"rotate":     app.Rotate,
+	switch flag.Arg(0) {
+	case "replace":
+		output = replace(input, flag.Arg(1), flag.Arg(2))
+	case "capitalize":
+		output = capitalize(input)
+	case "uppercase":
+		output = uppercase(input)
+	case "lowercase":
+		output = lowercase(input)
+	case "md5":
+		output = hashMD5(input)
+	case "sha1":
+		output = hashSHA1(input)
+	case "chunk":
+		output = chunk(input, flag.Arg(1))
+	case "length":
+		output = length(input, flag.Arg(1))
+	case "b64enc":
+		output = base64Encode(input)
+	case "b64dec":
+		output = base64Decode(input)
+	case "urldec":
+		output = urlDecode(input)
+	case "urlenc":
+		output = urlEncode(input)
+	case "rotate":
+		output = rotate(input, flag.Arg(1))
 	}
 
-	if function, ok := actions[action]; ok {
-		text = function(text)
-	}
-
-	fmt.Println(text)
+	fmt.Printf("%s", output)
 }
