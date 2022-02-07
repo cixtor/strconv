@@ -108,9 +108,9 @@ func chunk(text []byte, number string) []byte {
 // termination character, usually a character value with all bits zero.
 func length(text []byte, verbose string) []byte {
 	if verbose == "-v" {
-		return []byte(fmt.Sprintf("[%d]string{%q}\n", len(text), text))
+		return []byte(fmt.Sprintf("[%d]string{%q}", len(text), text))
 	}
-	return []byte(fmt.Sprintf("%d\n", len(text)))
+	return []byte(fmt.Sprintf("%d", len(text)))
 }
 
 // base64Encode encodes data with MIME base64. Base64 is a group of similar
@@ -121,7 +121,7 @@ func length(text []byte, verbose string) []byte {
 func base64Encode(text []byte) []byte {
 	dst := make([]byte, base64.StdEncoding.EncodedLen(len(text)))
 	base64.StdEncoding.Encode(dst, text)
-	return append(dst, byte('\n'))
+	return dst
 }
 
 // base64Decode decodes data encoded with MIME base64. Base64 is a group of

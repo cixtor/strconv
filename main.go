@@ -52,36 +52,32 @@ func main() {
 		os.Exit(1)
 	}
 
-	var output []byte
-
 	switch flag.Arg(0) {
 	case "replace":
-		output = replace(input, flag.Arg(1), flag.Arg(2))
+		fmt.Printf("%s", replace(input, flag.Arg(1), flag.Arg(2)))
 	case "capitalize":
-		output = capitalize(input)
+		fmt.Printf("%s", capitalize(input))
 	case "uppercase":
-		output = uppercase(input)
+		fmt.Printf("%s", uppercase(input))
 	case "lowercase":
-		output = lowercase(input)
+		fmt.Printf("%s", lowercase(input))
 	case "md5":
-		output = hashMD5(input)
+		fmt.Printf("%s\n", hashMD5(input))
 	case "sha1":
-		output = hashSHA1(input)
+		fmt.Printf("%s\n", hashSHA1(input))
 	case "chunk":
-		output = chunk(input, flag.Arg(1))
+		fmt.Printf("%s", chunk(input, flag.Arg(1)))
 	case "length":
-		output = length(input, flag.Arg(1))
+		fmt.Printf("%s\n", length(input, flag.Arg(1)))
 	case "b64enc":
-		output = base64Encode(input)
+		fmt.Printf("%s\n", base64Encode(input))
 	case "b64dec":
-		output = base64Decode(input)
-	case "urldec":
-		output = urlDecode(input)
+		fmt.Printf("%s", base64Decode(input))
 	case "urlenc":
-		output = urlEncode(input)
+		fmt.Printf("%s\n", urlEncode(input))
+	case "urldec":
+		fmt.Printf("%s", urlDecode(input))
 	case "rotate":
-		output = rotate(input, flag.Arg(1))
+		fmt.Printf("%s", rotate(input, flag.Arg(1)))
 	}
-
-	fmt.Printf("%s", output)
 }
