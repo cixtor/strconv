@@ -1,0 +1,10 @@
+[
+	{"caption": "Strconv: MD5", "command": "strconv", "args": {"action": "md5"}},
+	{"caption": "Strconv: SHA1", "command": "strconv", "args": {"action": "sha1"}},
+	{"caption": "Strconv: Chunk", "command": "strconv", "args": {"action": "chunk"}},
+	{"caption": "Strconv: Base64 Encode", "command": "strconv", "args": {"action": "b64enc"}},
+	{"caption": "Strconv: Base64 Decode", "command": "strconv", "args": {"action": "b64dec"}},
+	{"caption": "Strconv: URL Decode", "command": "strconv", "args": {"action": "urldec"}},
+	{"caption": "Strconv: URL Encode", "command": "strconv", "args": {"action": "urlenc"}},
+	{"caption": "Strconv: RGBfy", "command": "strconv", "args": {"action": "rgbfy"}}
+]
