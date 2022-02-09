@@ -1,3 +1,4 @@
+import hashlib
 import sublime
 import sublime_plugin
 import subprocess
@@ -13,7 +14,10 @@ class StrconvCommand(sublime_plugin.TextCommand):
 			if the_text == "":
 				self.set_status("nothing to format")
 				continue
-			the_text = self.external_command(the_text, **args)
+			if args.get("action") == "md5":
+				the_text = hashlib.md5(the_text.encode("utf-8")).hexdigest()
+			else:
+				the_text = self.external_command(the_text, **args)
 			region_text = self.view.substr(region)
 			self.view.replace(edit, region, the_text)
 			self.set_status("done")
