@@ -16,6 +16,8 @@ class StrconvCommand(sublime_plugin.TextCommand):
 				continue
 			if args.get("action") == "md5":
 				the_text = hashlib.md5(the_text.encode("utf-8")).hexdigest()
+			elif args.get("action") == "sha1":
+				the_text = hashlib.sha1(the_text.encode("utf-8")).hexdigest()
 			else:
 				the_text = self.external_command(the_text, **args)
 			region_text = self.view.substr(region)
