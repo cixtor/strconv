@@ -1,3 +1,4 @@
+import base64
 import hashlib
 import sublime
 import sublime_plugin
@@ -18,6 +19,8 @@ class StrconvCommand(sublime_plugin.TextCommand):
 				the_text = hashlib.md5(the_text.encode("utf-8")).hexdigest()
 			elif args.get("action") == "sha1":
 				the_text = hashlib.sha1(the_text.encode("utf-8")).hexdigest()
+			elif args.get("action") == "b64enc":
+				the_text = base64.b64encode(the_text.encode("utf-8")).decode("utf-8")
 			else:
 				the_text = self.external_command(the_text, **args)
 			region_text = self.view.substr(region)
