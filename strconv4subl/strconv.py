@@ -26,6 +26,8 @@ class StrconvCommand(sublime_plugin.TextCommand):
 				the_text = base64.b64decode(the_text.encode("utf-8")).decode("utf-8")
 			elif args.get("action") == "urlenc":
 				the_text = urllib.parse.quote(the_text)
+			elif args.get("action") == "urldec":
+				the_text = urllib.parse.unquote(the_text)
 			else:
 				the_text = self.external_command(the_text, **args)
 			region_text = self.view.substr(region)
