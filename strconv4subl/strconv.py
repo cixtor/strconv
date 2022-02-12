@@ -28,6 +28,8 @@ class StrconvCommand(sublime_plugin.TextCommand):
 				the_text = urllib.parse.quote(the_text)
 			elif args.get("action") == "urldec":
 				the_text = urllib.parse.unquote(the_text)
+			elif args.get("action") == "rgbfy":
+				the_text = self.rgbfy(the_text)
 			else:
 				the_text = self.external_command(the_text, **args)
 			region_text = self.view.substr(region)
@@ -47,6 +49,11 @@ class StrconvCommand(sublime_plugin.TextCommand):
 			self.set_status(err.split("\n")[0])
 			return the_text
 		return out
+
+
+	def rgbfy(self, the_text):
+		h = hashlib.md5(the_text.encode("utf-8")).digest()
+		return "#{:02X}{:02X}{:02X}".format(h[0], h[1], h[2])
 
 
 	def set_status(self, message):
