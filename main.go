@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 )
 
@@ -38,7 +37,7 @@ func main() {
 	}
 
 	reader := io.LimitReader(os.Stdin, 2<<22)
-	input, err := ioutil.ReadAll(reader)
+	input, err := io.ReadAll(reader)
 
 	if err != nil {
 		fmt.Println("read err;", err)
