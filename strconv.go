@@ -16,7 +16,7 @@ import (
 // replacement term is unspecified or empty, all occurrences of the search term
 // will be removed from the string.
 func replace(text []byte, viejo string, nuevo string) []byte {
-	return bytes.Replace(text, []byte(viejo), []byte(nuevo), -1)
+	return bytes.ReplaceAll(text, []byte(viejo), []byte(nuevo))
 }
 
 // capitalize will write a word with its first letter as a capital letter
