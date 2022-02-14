@@ -103,7 +103,7 @@ func length(text []byte, verbose string) []byte {
 	if verbose == "-v" {
 		return []byte(fmt.Sprintf("[%d]string{%q}", len(text), text))
 	}
-	return []byte(fmt.Sprintf("%d", len(text)))
+	return []byte(strconv.Itoa(len(text)))
 }
 
 // base64Encode encodes data with MIME base64. Base64 is a group of similar
