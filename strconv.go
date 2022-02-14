@@ -70,26 +70,19 @@ func hashSHA1(text []byte) []byte {
 // chunk splits a string into smaller pieces, default: 64.
 func chunk(text []byte, number string) []byte {
 	limit, err := strconv.Atoi(number)
-
-	if err != nil {
+	if err != nil || limit <= 0 {
 		limit = 64
 	}
-
-	var counter int
-	var result []byte
 	total := len(text)
-
-	for i := 0; i < total; i++ {
-		counter++
-		result = append(result, text[i:i+1]...)
-
-		if counter >= limit {
-			counter = 0
-			result = append(result, byte('\n'))
+	newlineCount := total / limit
+	result := make([]byte, 0, total+newlineCount)
+	for i, b := range text {
+		result = append(result, b)
+		if (i+1)%limit == 0 {
+			result = append(result, '\n')
 		}
 	}
-
-	return result[0:] // remove last new line.
+	return result
 }
 
 // length measures the arbitrary (but finite) length of a chain of letters.
