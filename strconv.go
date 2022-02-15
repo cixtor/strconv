@@ -63,8 +63,9 @@ func hashMD5(text []byte) []byte {
 // attack. SHA1 should be used in preference to MD4 or MD5 in new applications.
 func hashSHA1(text []byte) []byte {
 	hash := sha1.Sum(text)
-	hstr := hex.EncodeToString(hash[:])
-	return []byte(hstr)
+	dst := make([]byte, hex.EncodedLen(len(hash)))
+	hex.Encode(dst, hash[:])
+	return dst
 }
 
 // chunk splits a string into smaller pieces, default: 64.
