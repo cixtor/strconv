@@ -169,20 +169,20 @@ func urlDecode(text []byte) []byte {
 // passing an encoded string as argument will return the original version.
 func rotate(text []byte, number string) []byte {
 	n, err := strconv.Atoi(number)
-
 	if err != nil {
 		n = 13
 	}
-
-	rotator := func(char rune) rune {
+	shift := byte((n%26 + 26) % 26)
+	result := make([]byte, len(text))
+	for i, b := range text {
 		switch {
-		case char >= 'A' && char <= 'Z':
-			return 'A' + (char-'A'+rune(n))%26
-		case char >= 'a' && char <= 'z':
-			return 'a' + (char-'a'+rune(n))%26
+		case b >= 'A' && b <= 'Z':
+			result[i] = 'A' + (b-'A'+shift)%26
+		case b >= 'a' && b <= 'z':
+			result[i] = 'a' + (b-'a'+shift)%26
+		default:
+			result[i] = b
 		}
-		return char
 	}
-
-	return bytes.Map(rotator, text)
+	return result
 }
