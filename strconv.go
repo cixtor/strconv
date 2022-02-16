@@ -126,10 +126,11 @@ func base64Encode(text []byte) []byte {
 // base64 digit represents exactly 6 bits of data.
 func base64Decode(text []byte) []byte {
 	dst := make([]byte, base64.StdEncoding.DecodedLen(len(text)))
-	if _, err := base64.StdEncoding.Decode(dst, text); err != nil {
+	n, err := base64.StdEncoding.Decode(dst, text)
+	if err != nil {
 		return []byte(err.Error())
 	}
-	return dst
+	return dst[:n]
 }
 
 // urlEncode encodes a chain of letters using the percent-encoding technique.
