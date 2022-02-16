@@ -53,8 +53,9 @@ func lowercase(text []byte) []byte {
 // MD5 calculates a message-digest fingerprint (checksum) for a file.
 func hashMD5(text []byte) []byte {
 	hash := md5.Sum(text)
-	hstr := hex.EncodeToString(hash[:])
-	return []byte(hstr)
+	dst := make([]byte, hex.EncodedLen(len(hash)))
+	hex.Encode(dst, hash[:])
+	return dst
 }
 
 // SHA1 message-digest algorithm. This algorithm takes a message and generates a
