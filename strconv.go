@@ -6,7 +6,6 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 	"encoding/hex"
-	"fmt"
 	"net/url"
 	"strconv"
 )
@@ -107,7 +106,13 @@ func chunk(text []byte, number string) []byte {
 // termination character, usually a character value with all bits zero.
 func length(text []byte, verbose string) []byte {
 	if verbose == "-v" {
-		return []byte(fmt.Sprintf("[%d]string{%q}", len(text), text))
+		buf := make([]byte, 0, len(text)+16)
+		buf = append(buf, '[')
+		buf = strconv.AppendInt(buf, int64(len(text)), 10)
+		buf = append(buf, ']', 's', 't', 'r', 'i', 'n', 'g', '{')
+		buf = strconv.AppendQuote(buf, string(text))
+		buf = append(buf, '}')
+		return buf
 	}
 	return []byte(strconv.Itoa(len(text)))
 }
