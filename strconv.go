@@ -78,9 +78,13 @@ func chunk(text []byte, number string) []byte {
 	total := len(text)
 	newlineCount := total / limit
 	result := make([]byte, 0, total+newlineCount)
-	for i, b := range text {
-		result = append(result, b)
-		if (i+1)%limit == 0 {
+	for i := 0; i < total; i += limit {
+		end := i + limit
+		if end > total {
+			end = total
+		}
+		result = append(result, text[i:end]...)
+		if i+limit <= total {
 			result = append(result, '\n')
 		}
 	}
