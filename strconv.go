@@ -55,7 +55,20 @@ func capitalize(text []byte) []byte {
 // used in headings and special situations, such as for typographical emphasis
 // in text made on a typewriter.
 func uppercase(text []byte) []byte {
-	return bytes.ToUpper(text)
+	for _, b := range text {
+		if b >= utf8.RuneSelf {
+			return bytes.ToUpper(text)
+		}
+	}
+	result := make([]byte, len(text))
+	for i, b := range text {
+		if b >= 'a' && b <= 'z' {
+			result[i] = b - 'a' + 'A'
+		} else {
+			result[i] = b
+		}
+	}
+	return result
 }
 
 // lowercase - Letter case (or just case) is the distinction between the letters
