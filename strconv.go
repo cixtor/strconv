@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	"net/url"
 	"strconv"
+	"unicode/utf8"
 )
 
 // replace returns the given string with all occurrences of a search term
@@ -23,7 +24,27 @@ func replace(text []byte, viejo string, nuevo string) []byte {
 // systems with a case distinction. The term is also used for the choice of
 // case in text.
 func capitalize(text []byte) []byte {
-	return bytes.Title(text)
+	for _, b := range text {
+		if b >= utf8.RuneSelf {
+			return bytes.Title(text)
+		}
+	}
+	result := make([]byte, len(text))
+	start := true
+	for i, b := range text {
+		if start && b >= 'a' && b <= 'z' {
+			result[i] = b - 'a' + 'A'
+		} else {
+			result[i] = b
+		}
+		switch b {
+		case ' ', '\t', '\n', '\r', '\f', '\v':
+			start = true
+		default:
+			start = false
+		}
+	}
+	return result
 }
 
 // uppercase - Letter case (or just case) is the distinction between the letters
