@@ -232,6 +232,9 @@ func rotate(text []byte, number string) []byte {
 		n = 13
 	}
 	shift := byte((n%26 + 26) % 26)
+	if shift == 0 {
+		return append([]byte(nil), text...)
+	}
 	result := make([]byte, len(text))
 	for i, b := range text {
 		switch {
