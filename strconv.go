@@ -80,7 +80,20 @@ func uppercase(text []byte) []byte {
 // computer commands, and in SMS language (avoiding the shift key, to type more
 // quickly).
 func lowercase(text []byte) []byte {
-	return bytes.ToLower(text)
+	for _, b := range text {
+		if b >= utf8.RuneSelf {
+			return bytes.ToLower(text)
+		}
+	}
+	result := make([]byte, len(text))
+	for i, b := range text {
+		if b >= 'A' && b <= 'Z' {
+			result[i] = b - 'A' + 'a'
+		} else {
+			result[i] = b
+		}
+	}
+	return result
 }
 
 // MD5 calculates a message-digest fingerprint (checksum) for a file.
