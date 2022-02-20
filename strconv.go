@@ -55,10 +55,17 @@ func capitalize(text []byte) []byte {
 // used in headings and special situations, such as for typographical emphasis
 // in text made on a typewriter.
 func uppercase(text []byte) []byte {
+	hasLower := false
 	for _, b := range text {
 		if b >= utf8.RuneSelf {
 			return bytes.ToUpper(text)
 		}
+		if b >= 'a' && b <= 'z' {
+			hasLower = true
+		}
+	}
+	if !hasLower {
+		return append([]byte(nil), text...)
 	}
 	result := make([]byte, len(text))
 	for i, b := range text {
