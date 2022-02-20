@@ -87,10 +87,17 @@ func uppercase(text []byte) []byte {
 // computer commands, and in SMS language (avoiding the shift key, to type more
 // quickly).
 func lowercase(text []byte) []byte {
+	hasUpper := false
 	for _, b := range text {
 		if b >= utf8.RuneSelf {
 			return bytes.ToLower(text)
 		}
+		if b >= 'A' && b <= 'Z' {
+			hasUpper = true
+		}
+	}
+	if !hasUpper {
+		return append([]byte(nil), text...)
 	}
 	result := make([]byte, len(text))
 	for i, b := range text {
