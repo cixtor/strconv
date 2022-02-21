@@ -213,10 +213,19 @@ func base64Decode(text []byte) []byte {
 // form-urlencoded media type, as is often used in the submission of HTML form
 // data in HTTP requests.
 func urlEncode(text []byte) []byte {
-	if text[len(text)-1] == '\n' {
-		text = text[0 : len(text)-1]
+	if len(text) == 0 {
+		return nil
 	}
-	return []byte(url.QueryEscape(string(text)))
+	if text[len(text)-1] == '\n' {
+		text = text[:len(text)-1]
+	}
+	for _, b := range text {
+		if (b >= 'A' && b <= 'Z') || (b >= 'a' && b <= 'z') || (b >= '0' && b <= '9') || b == '-' || b == '_' || b == '.' || b == '~' {
+			continue
+		}
+		return []byte(url.QueryEscape(string(text)))
+	}
+	return append([]byte(nil), text...)
 }
 
 // urlDecode decodes a chain of letters using the percent-encoding technique.
